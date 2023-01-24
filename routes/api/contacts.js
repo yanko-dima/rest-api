@@ -1,7 +1,5 @@
 const express = require("express");
 const router = express.Router();
-// const { validation } = require("../../middlewares");
-// const { contactSchema } = require("../../schema");
 const { contacts: ctrl } = require("../../controllers");
 
 router.get("/", ctrl.getAll);
