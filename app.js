@@ -2,9 +2,11 @@
 // const logger = require("morgan");
 // const cors = require("cors");
 const mongoose = require("mongoose");
-const { DB_HOST } = require("./config");
+// const DB_HOST = "mongodb+srv://yanko-dima:zizA1402@cluster0.vovwqtq.mongodb.net/db-contacts?retryWrites=true&w=majority";
+const { DB_HOST_HEROKU } = require(process.env.DB_HOST);
+
 mongoose
-  .connect(DB_HOST)
+  .connect(DB_HOST_HEROKU)
   .then(() => console.log("Database connection successful"))
   .catch((error) => {
     console.log(error.message);
