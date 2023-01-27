@@ -1,6 +1,7 @@
 const fs = require("fs/promises");
 const path = require("path");
 const { v4 } = require("uuid");
+// const { Contact } = require("./contacts");
 
 const contatsPath = path.resolve("./models/contacts.json");
 const updatecontacts = async (contacts) => {
