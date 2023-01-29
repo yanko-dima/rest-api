@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = process.env;
 
 // const decodeToken = jwt.decode(token);
-// const verifyTocen = jwt.verify(token, SECRET_KEY);
 
 const login = async (req, res, next) => {
   try {
