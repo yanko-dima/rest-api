@@ -4,8 +4,6 @@ const jwt = require("jsonwebtoken");
 
 const { SECRET_KEY } = process.env;
 
-// const decodeToken = jwt.decode(token);
-
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -25,6 +23,7 @@ const login = async (req, res, next) => {
       id: user._id,
     };
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+    await User.findByIdAndUpdate(user._id, { token });
     res.json({
       status: "Success",
       code: 200,

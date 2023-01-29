@@ -1,3 +1,3 @@
-const isAuth = require("./auth");
+const isAuth = require("./isAuth");
 
 module.exports = { isAuth };

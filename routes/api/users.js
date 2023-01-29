@@ -9,4 +9,6 @@ router.put("/login", ctrl.login);
 
 router.get("/current", isAuth, ctrl.getCurrent);
 
+router.get("/logout", isAuth, ctrl.logout);
+
 module.exports = router;
