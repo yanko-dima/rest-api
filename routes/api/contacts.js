@@ -14,9 +14,4 @@ router.put("/:contactId", ctrl.updateById);
 
 router.patch("/:contactId/favorite", ctrl.updateFavorite);
 
-// Auth routs
-// /registration
-// /registration
-// /list (rivat route)
-
 module.exports = router;
