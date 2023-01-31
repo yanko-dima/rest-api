@@ -1,5 +1,6 @@
 const { User, joiAuthSchema } = require("../../models");
 const createError = require("http-errors");
+const gravatar = require("gravatar");
 
 const signup = async (req, res, next) => {
   try {
@@ -15,7 +16,8 @@ const signup = async (req, res, next) => {
       throw error;
     }
 
-    const newUser = new User({ email });
+    const avatarURL = gravatar.url(email);
+    const newUser = new User({ email, avatarURL });
     newUser.setPassword(password);
     newUser.save();
 
@@ -25,6 +27,7 @@ const signup = async (req, res, next) => {
       data: {
         user: {
           email,
+          avatarURL,
           subscription: "starter",
         },
       },

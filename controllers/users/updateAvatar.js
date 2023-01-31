@@ -1,0 +1,30 @@
+const { User } = require("../../models");
+const fs = require("fs").promises;
+const path = require("path");
+
+const avatarsDir = path.join(__dirname, "../../", "public", "avatars");
+
+const updateAvatar = async (req, res, next) => {
+  const { path: tempUpload, originalname } = req.file;
+  const { _id: id } = req.user;
+  const imageName = `${id}_${originalname}`;
+  try {
+    const resultUpload = path.join(avatarsDir, imageName);
+    await fs.rename(tempUpload, resultUpload);
+    const avatarURL = path.join("public", "avatars", imageName);
+    await User.findByIdAndUpdate(id, { avatarURL });
+
+    res.status(200).json({
+      status: "Success",
+      code: 200,
+      data: {
+        avatarURL,
+      },
+    });
+  } catch (error) {
+    fs.unlink(tempUpload);
+    next(error);
+  }
+};
+
+module.exports = updateAvatar;
