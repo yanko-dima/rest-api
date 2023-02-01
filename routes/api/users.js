@@ -1,14 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const { users: ctrl } = require("../../controllers");
-const { isAuth } = require("../../middlewares");
+const { isAuth, uploadAvatar } = require("../../middlewares");
 
-router.put("/signup", ctrl.signup);
+router.post("/signup", ctrl.signup);
 
-router.put("/login", ctrl.login);
+router.post("/login", ctrl.login);
 
 router.get("/current", isAuth, ctrl.getCurrent);
 
 router.get("/logout", isAuth, ctrl.logout);
+
+router.patch(
+  "/avatars",
+  isAuth,
+  uploadAvatar.single("avatarURL"),
+  ctrl.updateAvatar
+);
+
+router.get("/verify/:verificationToken", ctrl.verifyEmail);
 
 module.exports = router;
